@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="text-center">
+        <div id="logo">
+            <%= image_tag("logo.png") %>
+        </div>
+        <div id="title">
+            <h1 class="display-3"><%= t('app.name') %></h1>
+        </div>
+        <div>
+            <h5><%= t('app.introduce') %></h5>
+        </div>
+        <div id="social" style="color: #1b95e0">
+            <a class="btn btn-secondary btn-sm" href="https://github.com/badtudou"><i class="fa fa-github fa-2x" aria-hidden="true"></i>&nbsp;<%= t('about.like') =%></a>
+            <a class="btn btn-secondary btn-sm" href="http://weibo.com/badtudou"><i class="fa fa-heart fa-2x" aria-hidden="true"></i>&nbsp;<%= t('about.donate') =%></a>
+            <a class="btn btn-secondary btn-sm" href="http://weibo.com/badtudou"><i class="fa fa-commenting fa-2x" aria-hidden="true"></i>&nbsp;<%= t('about.contact') =%></a>
+        </div>
+    </div>
+</div>
