@@ -38,3 +38,10 @@ zh_cn:
     like: '关注我'
     donate: '捐赠'
     contact: '联系我'
+
+  action:
+    login: '登录'
+    register: '注册'
+    logout: '退出'
+    incognito: '匿名模式'
+    notification: '通知'

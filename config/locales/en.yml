@@ -39,3 +39,10 @@ en:
     donate: 'Donate'
     contact: 'Contact'
 
+  action:
+    login: 'Login'
+    register: 'Register'
+    logout: 'Logout'
+    incognito: 'Incognito Mode'
+    notification: 'Notification'
+
