@@ -1,0 +1,15 @@
+<div id="app">
+    <el-row :gutter="20">
+        <el-col :span="6" type="flex" justify="center">
+            <%= render partial:"shared/upload", locals:{action:'upload', explain:'只能上传txt文件，且不超过5MB'} %>
+        </el-col>
+    </el-row>
+</div>
+ <script>
+new Vue({
+    el: '#app',
+      data: function() {
+        return null;
+      }
+    })
+</script>
