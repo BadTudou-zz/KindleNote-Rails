@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+    get 'note/index'
+
     get  'clipping',        to: 'clipping#index'
     post 'clipping/upload', to: 'clipping#upload'
 

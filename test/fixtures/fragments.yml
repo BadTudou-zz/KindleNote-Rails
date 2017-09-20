@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  note_id: 1
+  user_id: 1
+  type: 
+  datetime: 2017-09-20 12:51:48
+
+two:
+  note_id: 1
+  user_id: 1
+  type: 
+  datetime: 2017-09-20 12:51:48

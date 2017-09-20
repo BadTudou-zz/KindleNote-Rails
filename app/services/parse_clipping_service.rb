@@ -28,6 +28,7 @@ class ParseClippingService
                 end
             end
         end
+        sections.delete_at(0)
         return sections
     end
 
@@ -50,7 +51,8 @@ class ParseClippingService
             fragment[:type] = $1
             fragment[:date] = $3 || NOTE_DEFAULT_DATETIME
             fragment.delete(:type_date)
-
+            
+            fragment[:content].lstrip!
             # 将片段添加到数组
             fragments.push(fragment)
         end
@@ -69,12 +71,12 @@ class ParseClippingService
             fragment.delete(:author)
 
             if notes.has_key?(title)
-                notes[title][:note].push(fragment)
+                notes[title][:fragment].push(fragment)
             else
                 notes[title] = {
                                             :title=>title, 
                                             :author=>author,
-                                            :note =>[fragment]
+                                            :fragment =>[fragment]
                                 }
             end
         end
