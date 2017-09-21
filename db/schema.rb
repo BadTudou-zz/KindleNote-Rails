@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170920045148) do
+ActiveRecord::Schema.define(version: 20170921130455) do
 
   create_table "fragments", force: :cascade do |t|
     t.integer "note_id"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 20170920045148) do
     t.string "author"
     t.string "cover_url"
     t.decimal "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.string "rember_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
