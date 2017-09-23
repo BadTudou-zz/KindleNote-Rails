@@ -16,6 +16,8 @@
     <%= javascript_pack_tag 'application' %>
     <!-- JQuery -->
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- Popper -->
     <script src="https://cdn.bootcss.com/popper.js/1.11.1/umd/popper.min.js"></script>
     <!-- Bootstrap -->
@@ -29,7 +31,11 @@
     <header>
         <%= render "shared/header" %>
     </header>
-    <%= yield %>
+    <div class="container">
+        <div class="row">
+            <%= yield %>
+        </div>
+    </div>
     <footer>
         <%= render "shared/footer" %>
     </footer>

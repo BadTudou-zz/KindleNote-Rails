@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-    get 'users/new',        to: 'user#new'
-    post 'users/create',    to: 'user#create'
+    get 'register',         to: 'user#new'
+    post 'register',        to: 'user#create'
 
     get 'note/index'
 
