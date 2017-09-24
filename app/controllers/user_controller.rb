@@ -1,5 +1,6 @@
 class UserController < ApplicationController
     protect_from_forgery :except => [:create]
+    skip_before_action :require_login, only: [:new, :create]
 
     def new
         @user = User.new
@@ -8,9 +9,19 @@ class UserController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
-            render :json => 'register success'
+            log_in @user
+            flash[:success] = "You has beed registerd"
+            render :json => {
+                status:true,
+                message:'Login success',
+                url:'/user/show'
+            }
         else
-            render :json => @user.errors
+            flash[:error] = "You has not registerd"
+            render :json => {
+                status:false,
+                message:'Login error'
+            }
         end
     end
 

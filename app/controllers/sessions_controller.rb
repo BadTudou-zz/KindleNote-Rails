@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
     protect_from_forgery :except => [:create]
+    skip_before_action :require_login, only: [:new, :create]
     
     def new
     end
@@ -19,5 +20,10 @@ class SessionsController < ApplicationController
                 message:'Login error'
             }
         end
+    end
+
+    def destroy
+        log_out
+        redirect_to root_url
     end
 end

@@ -12,12 +12,22 @@ import Vue from 'vue/dist/vue.esm'
 import App from './app.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.body.appendChild(document.createElement('app'))
-  const app = new Vue({
-    el: 'app',
-    template: '<App/>',
-    components: { App }
-  })
+    document.body.appendChild(document.createElement('app'))
+        const app = new Vue({
+            el: 'app',
+            template: '<App/>',
+            components: { App }
+    })
+
+    // Hide message after 3s
+    $(function() {
+        setTimeout(function() {
+            $('.alert').fadeOut('fast')
+        }, 1000)
+    })
 
   console.log(app)
 })
+
+
+

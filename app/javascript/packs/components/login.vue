@@ -18,6 +18,7 @@
     </div>
     <div class="card-block">
       <a href="#" class="btn btn-primary" @click="login()">立即登陆</a><br>
+      <a href="register" class="card-link text-right">还未注册?</a>
       <a href="#" class="card-link text-right">忘记密码?</a>
     </div>
   </div>
@@ -56,7 +57,7 @@ export default {
               console.log(data.message)
               window.location.href = data.url
             } else{
-              console.log(data.message)
+              location.reload()
             }
             // success callback
           }, response => {

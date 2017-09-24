@@ -4,6 +4,7 @@
       class="upload-demo"
       drag
       action="upload"
+      on-success=onSuccess()
       multiple>
         <i class="el-icon-upload"></i>
         <!-- 后台无法接收到token -->
@@ -18,6 +19,11 @@
   export default {
     data: function () {
       return {
+      }
+    },
+    methods: {
+      onSuccess: function (response, file, fileList){
+        console.log(response)
       }
     }
   }

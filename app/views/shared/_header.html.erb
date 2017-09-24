@@ -5,10 +5,27 @@
   <li class="nav-item">
     <button class="btn btn-secondary" title="<%= t('action.notification') %>"><i class="fa fa-bell fa-1x" aria-hidden="true"></i></button>
   </li>
+  <% if logged_in? %>
+  <li class="nav-item">
+    <div class="btn-group">
+      <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle fa-2x"></i></a>
+        
+      <div class="dropdown-menu">
+        <span class="dropdown-item disabled" disabled style="color:#3089DF;"><%= current_user.name %></span>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+
+        <div class="dropdown-divider"></div>
+        <%= button_to "Sign out", logout_path, method: :delete, :class => 'btn-link dropdown-item' %>
+      </div>
+    </div>
+  </li>
+  <% else %>
   <li class="nav-item">
     <a class="nav-link" href="#"><%= t('action.register') %></a>
   </li>
   <li class="nav-item">
     <a class="nav-link active" href="#"><%= t('action.login') %></a>
   </li>
+  <% end %>
 </ul>
