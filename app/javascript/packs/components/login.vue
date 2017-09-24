@@ -1,23 +1,23 @@
 <template>
-  <div class="text-center">
+  <div class="card text-center">
     <div class="img-circle img-thumbnail img-responsive" id="div-login-logo">
-      <i class="fa fa-4x fa-rocket" aria-hidden="true"></i>
+      <i class="fa fa-4x fa-user-circle-o" aria-hidden="true" style="color: #707B85"></i>
     </div>
     <div class="card-block">
       <h4 class="card-title">登陆</h4>
-      <form id="div-form" :model="user" :rules="rules">
+      <form id="div-form" :model="user">
         <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-1x fa-user" aria-hidden="true"></i></span>
-          <input type="text" class="form-control" id="input-name" placeholder="用户名" v-model="user.name">
+          <span class="input-group-addon col-lg-2">&nbsp;<i class="fa fa-2x fa-envelope" aria-hidden="true"></i></span>
+          <input type="email" class="form-control" placeholder="邮箱" v-model="user.email">
         </div>
         <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-1x fa-lock" aria-hidden="true"></i></span>
-          <input type="password" class="form-control" id="input-password" placeholder="密码" v-model="user.pass">
+          <span class="input-group-addon col-lg-2">&nbsp;&nbsp;<i class="fa fa-2x fa-unlock-alt" aria-hidden="true"></i>&nbsp;&nbsp;</span>
+          <input type="password" class="form-control" id="input-password" placeholder="密码" v-model="user.password">
         </div>
       </form>
     </div>
     <div class="card-block">
-      <a href="#" class="btn btn-primary" @click="submitForm('user')">立即登陆</a><br>
+      <a href="#" class="btn btn-primary" @click="login()">立即登陆</a><br>
       <a href="#" class="card-link text-right">忘记密码?</a>
     </div>
   </div>
@@ -38,54 +38,31 @@
 <script>
 export default {
     data () {
-      var validateName = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入用户名'))
-        } else {
-          callback()
-        }
-      }
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'))
-        } else {
-          callback()
-        }
-      }
       return {
         user: {
-          name: '',
-          pass: '',
-        },
-        rules: {
-          name: [
-            { validator: validateName, trigger: 'blur' }
-          ],
-          pass: [
-            { validator: validatePass, trigger: 'blur' }
-          ]
+          email: '',
+          password: ''
         }
       }
     },
     methods: {
-      submitForm (formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            this.$http.get('http://admin.dev.weipeiapp.com').then(response => {
-              console.log(response)
+      login () {
+          axios.post('http://localhost:3000/login',{
+            user:this.user
+          }).then(response => {
+            console.log(response)
+            let data = response.data
+            if (data.status){
+              console.log(data.message)
+              window.location.href = data.url
+            } else{
+              console.log(data.message)
+            }
             // success callback
-            }, response => {
+          }, response => {
             // error callback
-            })
-          } else {
-            console.log('error submit!!')
-            return false
-          }
-        })
-      },
-      resetForm (formName) {
-        this.$refs[formName].resetFields()
+          })
       }
     }
-  }
+}
 </script>

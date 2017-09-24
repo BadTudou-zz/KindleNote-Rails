@@ -22,7 +22,7 @@
     </div>
     <div class="card-block">
       <a href="#" class="btn btn-primary" @click="register()">立即注册</a><br>
-      <a href="#" class="card-link text-right">已经注册?</a>
+      <a href="login" class="card-link text-right">已经注册?</a>
     </div>
   </div>
 </template>
