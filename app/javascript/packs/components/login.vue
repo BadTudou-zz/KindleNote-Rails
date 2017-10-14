@@ -54,7 +54,6 @@ export default {
             console.log(response)
             let data = response.data
             if (data.status){
-              console.log(data.message)
               window.location.href = data.url
             } else{
               location.reload()

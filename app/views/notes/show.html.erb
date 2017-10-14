@@ -1,0 +1,29 @@
+<link href="/style/css/custom.css" rel="stylesheet" type="text/css" />
+
+<div class="header col-md-12">
+    <div class="page-header">
+        <h1><small><span class="glyphicon glyphicon-book" aria-hidden="true"></span><%= @note.title %></small> <span class="badge"><%= @note.fragments.count %> </h1>
+    </div>
+</div>
+
+<div class="col-md-2">
+    <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" class="active text-center">
+            <a href="<%= user_notes_path(current_user.id) %>"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> 返回目录</a>
+        </li>
+    </ul>
+</div>
+<div class="col-lg-10 ">
+<% @note.fragments.each do |fragment| %>
+    <article>
+        <div class="panel panel-default">
+            <div class="panel-body mk393"><p><%= fragment.content %></p></div>
+            <div class="panel-footer text-right">
+                <span class="label label-primary"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span><%= fragment.fragment_type %></span> 
+                <span class="label label-default"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> #392-393</span> 
+                <span class="label label-default"><span class="glyphicon glyphicon-time" aria-hidden="true"></span><%= fragment.datetime%></span>
+            </div>
+        </div>
+    </article>
+<% end %>
+</div>

@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
     protect_from_forgery :except => [:create]
     skip_before_action :require_login, only: [:new, :create]
 
@@ -17,7 +17,7 @@ class UserController < ApplicationController
                 url:'/user/show'
             }
         else
-            flash[:error] = "You has not registerd"
+            flash[:warning] = "You has not registerd"
             render :json => {
                 status:false,
                 message:'Login error'

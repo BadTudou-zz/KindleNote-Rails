@@ -3,8 +3,8 @@
     <el-upload
       class="upload-demo"
       drag
-      action="upload"
-      on-success=onSuccess()
+      action="./"
+      :on-success="onSuccess"
       multiple>
         <i class="el-icon-upload"></i>
         <!-- 后台无法接收到token -->
@@ -23,7 +23,14 @@
     },
     methods: {
       onSuccess: function (response, file, fileList){
-        console.log(response)
+          console.log(response);
+          let data = response;
+            if (data.status){
+              console.log(data.message)
+              window.location.href = data.url
+            } else{
+              location.reload()
+            }
       }
     }
   }

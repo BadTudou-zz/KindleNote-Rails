@@ -12,9 +12,10 @@ class SessionsController < ApplicationController
             render :json => {
                 status:true,
                 message:'Login success',
-                url:'/user/show'
+                url: user_path(user)
             }
         else
+            flash[:warning] = 'email or passowrd wrong'
             render :json => {
                 status:false,
                 message:'Login error'

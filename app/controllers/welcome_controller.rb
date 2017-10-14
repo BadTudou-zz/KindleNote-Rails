@@ -1,5 +1,7 @@
 class WelcomeController < ApplicationController
-  def index
-    return puts 'hello'
-  end
+    skip_before_action :require_login, only: [:new, :create]
+    
+    def index
+        return puts 'hello'
+    end
 end

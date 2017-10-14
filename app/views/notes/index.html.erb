@@ -1,0 +1,20 @@
+<div class="col-lg-12">
+    <h4>全部笔记</h4>
+<% @notes.each do |note| %>
+    <div class="card col-lg-3" style="display: block;width: 30rem; float: left">
+        <img class="card-img-top rounded mx-auto d-block" src="https://img1.doubanio.com/lpic/s29521268.jpg" alt="Card image cap" style="width: 115px; height: 170[x;">
+        <div class="card-block">
+            
+            <p style="width: 300px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+                <%= link_to note.title, user_note_path(current_user.id, note.id), title:note.title %>    
+            </p>
+        </div>
+        <div class="card-block">
+
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+<% end %>
+    <%= will_paginate @notes %>
+</div>
