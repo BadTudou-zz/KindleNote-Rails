@@ -8,7 +8,7 @@ class NotesController < ApplicationController
     #     end
     # end
     def index
-        @notes = current_user.notes.paginate(:page => params[:page], :per_page => params[:page]).order('id DESC')
+        @notes = current_user.notes.paginate(:page => params[:page], :per_page => 8).order('id DESC')
     end
 
     def show

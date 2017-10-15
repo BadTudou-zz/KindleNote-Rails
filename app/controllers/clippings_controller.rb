@@ -19,8 +19,14 @@ class ClippingsController < ApplicationController
         File.open(clipping_file_path, 'wb+') do |file|
             file.write(uploaded_io.read)
         end
+
+        begin
+            ParseClippingToNoteJob.perform_later clipping_file_path.to_s, current_user
+        rescue => error
+            puts 'error'
+            flash[:danger] = 'Can not parse clipping to note'
+        end
         
-        ParseClippingToNoteJob.perform_later clipping_file_path.to_s, current_user
         render :json => {
                 status:true,
                 message:'Login success',
