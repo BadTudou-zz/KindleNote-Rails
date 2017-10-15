@@ -1,6 +1,5 @@
 class ParseClippingService
     NOTE_SECTION_SEPARATOR = '=========='
-    NOTE_DEFAULT_TITLE = 'Unknown title'
     NOTE_DEFAULT_AUTHOR = 'Unknown author'
     NOTE_DEFAULT_DATETIME = '1970-01-01 00:00:00'
     NOTE_LABEL = 'Note|笔记'
@@ -42,7 +41,7 @@ class ParseClippingService
 
             # 提取片段的标题与作者
             /(.*)\((.*)\).*/ =~ fragment[:title_author]
-            fragment[:title] = $1 || NOTE_DEFAULT_TITLE
+            fragment[:title] = $1 || fragment[:title_author]
             fragment[:author] = $2 || NOTE_DEFAULT_AUTHOR
             fragment.delete(:title_author)
                 
@@ -65,7 +64,7 @@ class ParseClippingService
         fragments ||= parseForFragment()
         notes = {}
         fragments.each do |fragment|
-            title = fragment[:title]
+            title = fragment[:title].strip
             author = fragment[:author]
             fragment.delete(:title)
             fragment.delete(:author)

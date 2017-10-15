@@ -5,25 +5,23 @@ class ParseClippingToNoteJob < ApplicationJob
     filePath = args.first
     user = args.second
     clipping = ParseClippingService.new(filePath)
-    begin
-        puts 'begin'
         notes = clipping.parseForNote
-        notes.each do |title,note|
-        note_saved = user.notes.create(title: title, author: note[:author])
-        fragments = note[:fragment]
+        notes.each do |title, note|
+            note_saved =  user.notes.find_by(title: note[:title].strip) || user.notes.create(title: note[:title].strip, author: note[:author])
+            fragments = note[:fragment]
             fragments.each do |fragment|
+            begin
                 Fragment.create(note_id: note_saved.id, 
                             user_id: user.id,
                             fragment_type: fragment[:type], 
                             content: fragment[:content],
                             datetime: fragment[:date]
                             )
+            rescue Exception => e
+                puts e
+                next
             end
         end
-    rescue
-            puts 'error'
-            flash[:danger] = 'Can not parse clipping to note'
     end
- 
   end
 end

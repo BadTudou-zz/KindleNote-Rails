@@ -1,8 +1,9 @@
-<link href="/style/css/custom.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/style/js/custom.js"></script>
+<link href="/style/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
 <div class="header col-md-12">
     <div class="page-header">
-        <h1><small><span class="glyphicon glyphicon-book" aria-hidden="true"></span><%= @note.title %></small> <span class="badge"><%= @note.fragments.count %> </h1>
+        <h1><small><span class="glyphicon glyphicon-book" aria-hidden="true"></span><%= @note.title %></small> <span class="badge"><%= @note.fragments.count %></span></h1>
     </div>
 </div>
 
@@ -16,12 +17,24 @@
 <div class="col-lg-10 ">
 <% @note.fragments.each do |fragment| %>
     <article>
-        <div class="panel panel-default">
+        <div class="panel panel-default row">
             <div class="panel-body mk393"><p><%= fragment.content %></p></div>
-            <div class="panel-footer text-right">
-                <span class="label label-primary"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span><%= fragment.fragment_type %></span> 
-                <span class="label label-default"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> #392-393</span> 
-                <span class="label label-default"><span class="glyphicon glyphicon-time" aria-hidden="true"></span><%= fragment.datetime%></span>
+            <div class="panel-footer col-lg-12">
+                <div class="col-lg-6 text-left" style="float: top">
+                     <span class="label label-primary"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span><%= fragment.fragment_type %></span> 
+                    <span class="label label-default"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> #392-393</span> 
+                    <span class="label label-default"><span class="glyphicon glyphicon-time" aria-hidden="true"></span><%= fragment.datetime%></span>
+                </div>
+                <div class="col-lg-6 text-right" style="float: top">
+                    <span><%= button_to user_note_fragment_path(current_user.id, fragment.note_id, fragment.id), {method: :delete, :class => 'btn-link', :style => 'float:right'} do %>
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        <% end %>
+                    </span>
+                    <span><%= button_to user_note_fragment_path(current_user.id, fragment.note_id, fragment.id), {method: :patch, :class => 'btn-link', :style => 'float:right'} do %>
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <% end %>
+                    </span>
+                </div>
             </div>
         </div>
     </article>

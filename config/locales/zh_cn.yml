@@ -45,3 +45,7 @@ zh_cn:
     logout: '退出'
     incognito: '匿名模式'
     notification: '通知'
+
+  will_paginate:
+    previous_label: '上一页'
+    next_label: '下一页'
