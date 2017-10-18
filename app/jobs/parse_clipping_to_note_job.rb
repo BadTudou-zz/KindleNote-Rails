@@ -1,5 +1,6 @@
 class ParseClippingToNoteJob < ApplicationJob
   queue_as :default
+  
 
   def perform(*args)
     filePath = args.first
@@ -7,7 +8,11 @@ class ParseClippingToNoteJob < ApplicationJob
     clipping = ParseClippingService.new(filePath)
         notes = clipping.parseForNote
         notes.each do |title, note|
-            note_saved =  user.notes.find_by(title: note[:title].strip) || user.notes.create(title: note[:title].strip, author: note[:author])
+            note_saved =  user.notes.find_by(title: note[:title].strip)
+            unless note_saved
+                note_saved = user.notes.create(title: note[:title].strip, author: note[:author], rating: 0)
+                StoreNoteInfoFromDoubanJob.perform_later note_saved.id
+            end
             fragments = note[:fragment]
             fragments.each do |fragment|
             begin
