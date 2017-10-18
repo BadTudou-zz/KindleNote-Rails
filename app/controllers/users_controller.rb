@@ -14,7 +14,7 @@ class UsersController < ApplicationController
             render :json => {
                 status:true,
                 message:'Login success',
-                url:'/user/show'
+                url:user_path(@user)
             }
         else
             flash[:warning] = "You has not registerd"

@@ -2,7 +2,7 @@
     <h4>全部笔记<small><span class="badge badge-secondary"><%= @notes.count %></span></small></h4>
 <% @notes.each do |note| %>
     <div class="card col-lg-3" style="display: block;width: 30rem; float: left">
-        <img class="card-img-top rounded mx-auto d-block" src="https://img3.doubanio.com/lpic/s29506335.jpg" alt="Card image cap" style="width: 115px; height: 170px;">
+        <img class="card-img-top rounded mx-auto d-block" src="<%= note.cover_url %>" alt="Card image cap" style="width: 115px; height: 170px;">
         <div class="card-block">
             
             <p style="width: 250px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
