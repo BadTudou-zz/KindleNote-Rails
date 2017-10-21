@@ -36,6 +36,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'rubocop', require: false
 gem 'webpacker'
 gem 'will_paginate', '~> 3.1.0'
+# Evernote API
+gem 'evernote_oauth'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
