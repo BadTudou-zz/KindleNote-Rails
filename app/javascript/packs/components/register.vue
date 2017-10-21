@@ -52,7 +52,7 @@ export default {
     },
     methods: {
       register () {
-          axios.post('http://localhost:3000/register', {
+          axios.post('https://localhost:3000/register', {
             user:this.user
           }).then(response => {
               console.log(response)
