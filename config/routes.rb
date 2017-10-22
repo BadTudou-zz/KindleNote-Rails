@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :users do
       resources :clippings
       resources :notes do
+        get 'markdown',  to: 'notes#markdown', as: 'markdown'
         resources :fragments
       end
     end
