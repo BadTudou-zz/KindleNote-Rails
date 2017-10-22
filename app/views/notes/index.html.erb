@@ -24,12 +24,9 @@
                         <% end %>
 
                         <div class="dropdown-divider"></div>
-                        <%= button_to  evernote_store_path(note.id),  method: :post, title:note.title,:class => 'btn-link dropdown-item' do %>
+                        <%= button_to  user_note_markdown_path(current_user.id, note.id),  method: :get, title:note.title,:class => 'btn-link dropdown-item' do %>
                             <%= image_tag "markdown_logo.png", :style =>"width: 24px; height: 24px;" %> Markdown
                         <% end %>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
                     </div>
             </span>
         </div>

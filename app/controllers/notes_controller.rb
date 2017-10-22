@@ -15,4 +15,27 @@ class NotesController < ApplicationController
         @note = Note.find(params[:id])
         @note.fragments = Fragment.where(user_id: current_user.id, note_id: params[:id])
     end
+
+    def markdown
+        @note = Note.find(params[:note_id])
+        @note.fragments = Fragment.where(user_id: current_user.id, note_id: params[:note_id])
+        title = "# #{@note.title}"
+        author = "**#{@note.author}**"
+        content = ''
+        @note.fragments.each do |fragment|
+            content += "* #{fragment[:content]} \n"
+        end
+
+        markdown_file_path = Rails.root.join('public', 'markdown', "#{UUID.new.generate}.md")
+        File.open(markdown_file_path, 'wb+') do |file|
+            file.write(title+"\n"+author+"\n"+content)
+        end
+        
+        send_file(
+                markdown_file_path,
+                filename: @note.title+".md",
+                type: "text/markdown"
+            )
+
+    end
 end
