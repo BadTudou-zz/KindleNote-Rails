@@ -38,6 +38,7 @@ gem 'webpacker'
 gem 'will_paginate', '~> 3.1.0'
 # Evernote API
 gem 'evernote_oauth'
+gem 'htmlentities', '~> 4.3', '>= 4.3.4'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

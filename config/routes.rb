@@ -7,10 +7,14 @@ Rails.application.routes.draw do
     post   '/login',        to: 'sessions#create'
     delete '/logout',       to: 'sessions#destroy'
 
-    #namespace :evernote do
-    get 'evernote/authorize',     to: 'evernote#authorize'
-    get 'evernote/callback',      to: 'evernote#callback'
-    #end
+    
+    scope 'evernote' do
+      get 'authorize',     to: 'evernote#authorize'
+      get 'callback',      to: 'evernote#callback'
+      get '/',          to: 'evernote#user'
+      post '/:id',             to: 'evernote#store', as: 'evernote_store'
+    end
+
     resources :users do
       resources :clippings
       resources :notes do

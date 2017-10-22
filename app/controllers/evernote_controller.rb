@@ -1,4 +1,5 @@
 require 'evernote_oauth'
+require 'htmlentities'
 
 class EvernoteController < ApplicationController
     def authorize
@@ -35,6 +36,40 @@ class EvernoteController < ApplicationController
         render :json => {
                 status:true,
                 message:'evernote oauth success'
+            }
+    end
+    def evernote
+        unless session["access_token"]
+            return redirect_to authorize_url
+        end
+        @evernote = EvernoteService.new(session["access_token"])
+    end
+
+    def user
+        render :json => {
+                status:true,
+                message:evernote.user
+            }
+    end
+
+    def store
+        note = Note.find(params[:id])
+        note.fragments = Fragment.where(user_id: current_user.id, note_id: params[:id])
+        content = ''
+        note.fragments.each do |fragment|
+            content += (HTMLEntities.new.encode(fragment[:content].force_encoding('UTF-8'))+ "<br/>")
+        end
+
+        begin
+            en_note = evernote.make_note(note[:title], content)
+        rescue Evernote::EDAM::Error::EDAMUserException => edue
+            p edue
+            return redirect_to authorize_url
+        end
+
+        render :json => {
+                status:true,
+                message:en_note
             }
     end
 end
