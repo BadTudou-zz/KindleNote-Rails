@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  name: MyText
+  access_token: MyText
+  scopes: MyText
+  revoked: false
+
+two:
+  user_id: 1
+  name: MyText
+  access_token: MyText
+  scopes: MyText
+  revoked: false

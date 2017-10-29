@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171015072443) do
+ActiveRecord::Schema.define(version: 20171029071517) do
+
+  create_table "access_tokens", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "name"
+    t.text "access_token"
+    t.text "scopes"
+    t.datetime "expires"
+    t.boolean "revoked"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_access_tokens_on_user_id"
+  end
 
   create_table "fragments", force: :cascade do |t|
     t.integer "note_id"

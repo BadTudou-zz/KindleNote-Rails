@@ -1,4 +1,6 @@
 class ClippingsController < ApplicationController
+    load_and_authorize_resource :user
+
     protect_from_forgery :except => [:upload]
     def index
         if logged_in?

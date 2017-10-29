@@ -4,7 +4,7 @@ class EvernoteService
     end
 
     def client
-        client ||= EvernoteOAuth::Client.new(token: @access_token.token)
+        client ||= EvernoteOAuth::Client.new(token: @access_token)
     end
 
     def user_store

@@ -1,12 +1,15 @@
 class NotesController < ApplicationController
-    # before_action :set_current_account, only: [:show]
+    load_and_authorize_resource :user
+    load_and_authorize_resource :note, :through => :user
+    before_action :set_current_account, only: [:show]
 
-    # def set_current_account
-    #     #  set @current_account from session data here
-    #     class << Note
-    #         attr_accessor :fragments
-    #     end
-    # end
+    def set_current_account
+        #  set @current_account from session data here
+        class << Note
+            attr_accessor :fragments
+        end
+    end
+
     def index
         @notes = current_user.notes.paginate(:page => params[:page], :per_page => 8).order('id DESC')
     end

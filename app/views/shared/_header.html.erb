@@ -22,10 +22,10 @@
   </li>
   <% else %>
   <li class="nav-item">
-    <a class="nav-link" href="#"><%= t('action.register') %></a>
+    <%= link_to t('action.register'), register_path, :class => 'nav-link' %>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="#"><%= t('action.login') %></a>
+    <%= link_to t('action.login'), login_path, :class => 'nav-link active' %>
   </li>
   <% end %>
 </ul>

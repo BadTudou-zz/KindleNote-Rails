@@ -9,8 +9,8 @@ Rails.application.routes.draw do
 
     
     scope 'evernote' do
-      get 'authorize',     to: 'evernote#authorize'
-      get 'callback',      to: 'evernote#callback'
+      get 'authorize',     to: 'evernote#authorize', as: 'evernote_authorize'
+      get 'callback',      to: 'evernote#callback', as: 'evernote_callback'
       get '/',          to: 'evernote#user'
       post '/:id',             to: 'evernote#store', as: 'evernote_store'
     end

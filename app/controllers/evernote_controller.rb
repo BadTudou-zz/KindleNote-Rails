@@ -2,6 +2,10 @@ require 'evernote_oauth'
 require 'htmlentities'
 
 class EvernoteController < ApplicationController
+    load_and_authorize_resource :user
+    before_action :check_access_token, only: [:user, :store]
+
+
     def authorize
         callback_url = request.url.chomp("authorize").concat("callback")
         client = EvernoteOAuth::Client.new
@@ -24,25 +28,33 @@ class EvernoteController < ApplicationController
             consumer = EvernoteOAuth::Client
             request_token = OAuth::RequestToken.new(consumer, session[:request_token], session[:request_token_secret])
             session[:access_token] = session['request_token'].get_access_token(:oauth_verifier => session[:oauth_verifier])
+            session[:access_token_expires] = session[:access_token].params['edam_expires']
+            current_user.access_tokens.create(user_id: current_user.id, name: 'evernote', access_token: session[:access_token].token, expires: Time.at(session[:access_token_expires].to_i / 1000), revoked:true )
         rescue => e
-            @last_error = 'Error extracting access token'
             return render :json => {
                 status: false,
                 access_token: session[:access_token],
-                message:@last_error
+                message:e
             }
         end
 
         render :json => {
                 status:true,
-                message:'evernote oauth success'
+                message:'evernote oauth success',
+                expires: Time.at(session[:access_token_expires].to_i / 1000)
             }
     end
-    def evernote
-        unless session["access_token"]
+
+    def check_access_token
+        unless current_user.access_tokens.where(name: 'evernote')
             return redirect_to authorize_url
         end
-        @evernote = EvernoteService.new(session["access_token"])
+    end
+
+    def evernote
+        consumer = EvernoteOAuth::Client
+        access_token = current_user.access_tokens.where(name: 'evernote').first
+        EvernoteService.new(access_token.access_token)
     end
 
     def user
@@ -69,7 +81,7 @@ class EvernoteController < ApplicationController
 
         render :json => {
                 status:true,
-                message:en_note
+                message:en_note.guid
             }
     end
 end

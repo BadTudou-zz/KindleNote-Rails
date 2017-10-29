@@ -1,10 +1,8 @@
 class SessionsController < ApplicationController
     protect_from_forgery :except => [:create]
     skip_before_action :require_login, only: [:new, :create]
+    skip_authorization_check :only => [:new, :create, :destroy]
     
-    def new
-    end
-
     def create
         user = User.find_by(email: params[:user][:email])
         if user && user.authenticate(params[:user][:password])

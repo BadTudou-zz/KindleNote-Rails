@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    load_and_authorize_resource :user
+
     protect_from_forgery :except => [:create]
     skip_before_action :require_login, only: [:new, :create]
 
@@ -26,6 +28,7 @@ class UsersController < ApplicationController
     end
 
     def show
+        
     end
 
     def user_params

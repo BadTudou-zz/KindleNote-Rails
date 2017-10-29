@@ -1,7 +1,34 @@
-<div class="col-lg-4"></div>
-<div class="col-4">
+<div class="col-lg-2"></div>
+<div class="col-lg-8">
+    <h3>Applications</h3>
+    <hr>
+    <ul style="list-style-type:none">
+        <li>
+            <div class="col-lg-12">
+                <span class="col-lg-4">
+                    <%= image_tag "evernote_logo.png", :style => "img-circle img-thumbnail",:class =>"width: 36px; height: 36px;" %> &nbsp;&nbsp;Evernote
+                </span>
+                <span class="col-lg-4"></span>
+                <span class="col-lg-4">
+                    <% if !current_user.access_tokens.where(name: 'evernote').first.nil? %>
+                        <%= link_to 'Revoke', evernote_authorize_path, :class => 'btn btn-sm btn-outline-primary text-danger' %> 
+                    <% else %>
+                        <%= link_to 'Authorized', evernote_authorize_path, :class => 'btn btn-sm btn-outline-primary' %>   
+                    <% end %>
+                </span>
+            </div>
+            <div class="col-lg-12">
+                <% if !current_user.access_tokens.where(name: 'evernote').first.nil? %>
+                    <small class="text-muted"><%= current_user.access_tokens.where(name: 'evernote').first.expires %></small>
+                <% else %>
+                    <small class="text-muted">KindleNote has no access to Evernote</small>
+                <% end %>
+            </div>
+            
+        </li>
+    </ul>
     <% if logged_in? %>
     <%= current_user.name %>
     <% end %>
 </div>
-<div class="col-4"></div>
+<div class="col-lg-2"></div>

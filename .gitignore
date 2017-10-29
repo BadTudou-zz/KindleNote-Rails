@@ -24,3 +24,5 @@
 /public/packs
 /public/packs-test
 /node_modules
+!tmp/caching-dev.txt
+!/public/uploads/18f3e830-9eb1-0135-377d-3035adb711be.txt
