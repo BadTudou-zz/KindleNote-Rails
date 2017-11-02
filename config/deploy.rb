@@ -1,25 +1,28 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
+# config valid for current version and patch releases of Capistrano
+lock "~> 3.10.0"
 
-# set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :application, "kindlenode"
+set :repo_url, "git@github.com:BadTudou/KindleNote-Rails.git"
+set :application, "project_name"
+set :branch, :master
+set :pty, true
+set :linked_files, %w{config/database.yml config/application.yml}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
+set :keep_releases, 5
+set :bundle_binstubs, nil
+set :rbenv_type, :user
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
-
-# if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
-
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
-
-# If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+set :puma_rackup, -> { File.join(current_path, "config.ru") }
+set :puma_state, -> { "#{shared_path}/tmp/pids/puma.state" }
+set :puma_pid, -> { "#{shared_path}/tmp/pids/puma.pid" }
+set :puma_bind, -> { "unix://#{shared_path}/tmp/sockets/puma.sock" }
+set :puma_conf, -> { "#{shared_path}/puma.rb" }
+set :puma_access_log, -> { "#{shared_path}/log/puma_access.log" }
+set :puma_error_log, -> { "#{shared_path}/log/puma_error.log" }
+set :puma_role, :app
+set :puma_env, fetch(:rack_env, fetch(:rails_env, "production"))
+set :puma_threads, [0, 8]
+set :puma_workers, 0
+set :puma_worker_timeout, nil
+set :puma_init_active_record, true
+set :puma_preload_app, false
