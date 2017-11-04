@@ -1,7 +1,7 @@
-<template>
-  <div class="card text-center">
-    <div class="img-circle img-thumbnail img-responsive" id="div-login-logo">
-      <i class="fa fa-4x fa-user-circle-o" aria-hidden="true" style="color: #707B85"></i>
+  <div class="card text-center" id="register">
+    <div class="card-block">
+      <div class="img-circle img-thumbnail img-responsive">
+      <i class="fa fa-4x fa-user-circle-o " aria-hidden="true" style="color: #707B85"></i></div>
     </div>
     <div class="card-block">
       <h4 class="card-title">注册</h4>
@@ -25,34 +25,21 @@
       <a href="login" class="card-link text-right">已经注册?</a>
     </div>
   </div>
-</template>
 
-<style type="text/css">
-#div-login-logo
-{
-  color: #0099F0; width: 90px; height: 90px; margin-top: 5px; padding-top: 10px;
-}
-#div-form, .input-group
-{
-  margin-top: 15px;
-}
-</style>
-</template>
 
 <script>
-export default {
-    data () {
-      return {
-        user: {
-          name: '',
-          email: '',
-          password:''
-        }
+  var app = new Vue({
+    el: '#register',
+    data: {
+      user:{
+        name:'',
+        email:'',
+        password:''
       }
     },
     methods: {
       register () {
-          axios.post('https://localhost:3000/register', {
+          axios.post('/register', {
             user:this.user
           }).then(response => {
               console.log(response)
@@ -66,8 +53,8 @@ export default {
             // success callback
             }, response => {
             // error callback
-            })
-        }
+          })
+      }
     }
-  }
+  });
 </script>
