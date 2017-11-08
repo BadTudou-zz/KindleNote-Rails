@@ -12,13 +12,13 @@ Rails.application.routes.draw do
       get 'authorize',     to: 'evernote#authorize', as: 'evernote_authorize'
       get 'callback',      to: 'evernote#callback', as: 'evernote_callback'
       get '/',          to: 'evernote#user'
-      post '/:id',             to: 'evernote#store', as: 'evernote_store'
     end
 
     resources :users do
       resources :clippings
       resources :notes do
-        get 'markdown',  to: 'notes#markdown', as: 'markdown'
+        get 'markdown',  to: 'notes#export_to_markdown', as: 'markdown'
+        post 'evernote', to: 'notes#export_to_evernote', as: 'evernote'
         resources :fragments
       end
     end

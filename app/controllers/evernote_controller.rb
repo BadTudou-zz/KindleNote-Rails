@@ -3,8 +3,6 @@ require 'htmlentities'
 
 class EvernoteController < ApplicationController
     load_and_authorize_resource :user
-    before_action :check_access_token, only: [:user, :store]
-
 
     def authorize
         callback_url = request.url.chomp("authorize").concat("callback")
@@ -45,17 +43,9 @@ class EvernoteController < ApplicationController
             }
     end
 
-    def check_access_token
-        unless current_user.access_tokens.where(name: 'evernote')
-            return redirect_to authorize_url
-        end
-    end
+    
 
-    def evernote
-        consumer = EvernoteOAuth::Client
-        access_token = current_user.access_tokens.where(name: 'evernote').first
-        EvernoteService.new(access_token.access_token)
-    end
+    
 
     def user
         render :json => {
@@ -64,24 +54,4 @@ class EvernoteController < ApplicationController
             }
     end
 
-    def store
-        note = Note.find(params[:id])
-        note.fragments = Fragment.where(user_id: current_user.id, note_id: params[:id])
-        content = ''
-        note.fragments.each do |fragment|
-            content += (HTMLEntities.new.encode(fragment[:content].force_encoding('UTF-8'))+ "<br/>")
-        end
-
-        begin
-            en_note = evernote.make_note(note[:title], content)
-        rescue Evernote::EDAM::Error::EDAMUserException => edue
-            p edue
-            return redirect_to authorize_url
-        end
-
-        render :json => {
-                status:true,
-                message:en_note.guid
-            }
-    end
 end

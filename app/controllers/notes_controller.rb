@@ -2,6 +2,7 @@ class NotesController < ApplicationController
     load_and_authorize_resource :user
     load_and_authorize_resource :note, :through => :user
     before_action :set_current_account, only: [:show]
+    before_action :check_access_token, only: [:export_to_evernote]
 
     def set_current_account
         #  set @current_account from session data here
@@ -19,7 +20,7 @@ class NotesController < ApplicationController
         @note.fragments = Fragment.where(user_id: current_user.id, note_id: params[:id])
     end
 
-    def markdown
+    def export_to_markdown
         @note = Note.find(params[:note_id])
         @note.fragments = Fragment.where(user_id: current_user.id, note_id: params[:note_id])
         title = "# #{@note.title}"
@@ -41,4 +42,38 @@ class NotesController < ApplicationController
             )
 
     end
+
+    def export_to_evernote
+        note = Note.find(params[:note_id])
+        note.fragments = Fragment.where(user_id: current_user.id, note_id: params[:id])
+        content = ''
+        note.fragments.each do |fragment|
+            content += (HTMLEntities.new.encode(fragment[:content].force_encoding('UTF-8'))+ "<br/>")
+        end
+
+        begin
+            en_note = evernote.make_note(note[:title], content)
+        rescue Evernote::EDAM::Error::EDAMUserException => edue
+            p edue
+            return redirect_to authorize_url
+        end
+
+        render :json => {
+                status:true,
+                message:en_note.guid
+            }
+    end
+
+    private
+        def evernote
+            consumer = EvernoteOAuth::Client
+            access_token = current_user.access_tokens.where(name: 'evernote').first
+            EvernoteService.new(access_token.access_token)
+        
+        end
+        def check_access_token
+            unless current_user.access_tokens.where(name: 'evernote').first
+                redirect_to evernote_authorize_url
+            end
+        end
 end

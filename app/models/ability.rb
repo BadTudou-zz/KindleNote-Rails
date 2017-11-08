@@ -15,7 +15,7 @@ class Ability
     if user
       can [:crud, :index], User
       can [:show], Note
-      can [:crud, :markdown], Note, user_ids: user.id
+      can [:crud, :export_to_markdown, :export_to_evernote], Note, user_ids: user.id
     end
     #
     # The first argument to `can` is the action you are giving the user

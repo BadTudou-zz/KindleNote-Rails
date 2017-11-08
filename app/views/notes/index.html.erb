@@ -23,7 +23,7 @@
                          Export 
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <%= button_to  evernote_store_path(note.id),  method: :post, title:note.title,:class => 'btn-link dropdown-item' do %>
+                        <%= button_to  user_note_evernote_path(current_user.id, note.id),  method: :post, title:note.title,:class => 'btn-link dropdown-item' do %>
                             <%= image_tag "evernote_logo.png", :style =>"width: 24px; height: 24px;" %> Evernote
                         <% end %>
 
