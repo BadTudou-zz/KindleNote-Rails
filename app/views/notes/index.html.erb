@@ -1,43 +1,62 @@
 <div class="col-lg-12">
-    <h4>全部笔记<small><span class="badge badge-secondary"><%= @notes.count %></span></small></h4>
-<% @notes.each do |note| %>
-    <div class="card col-lg-3" style="display: block;width: 30rem; float: left">
-        <% if note.cover_url %>
-            <img class="card-img-top rounded mx-auto d-block" src="<%= note.cover_url %>" alt="Card image cap" style="width: 115px; height: 150px;">
-        <% else %>
-            <%= image_tag "logo.png", :class => "card-img-top rounded mx-auto d-block", :style =>"width: 155px; height: 150px;" %>
-        <% end %>
-        <div class="card-block">
-            
-            <p style="width: 250px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-                <%= link_to note.title, user_note_path(current_user.id, note.id), title:note.title %>    
-            </p>
+    <div class="col-lg-12">
+        <div class="col-lg-6">
+            <h4>全部笔记<small><span class="badge badge-secondary"><%= @notes.count %></span></small></h4>
         </div>
-        <div class="card-block">
+        
+        <div class="col-lg-3" style="float: right;">
+            <%= button_to  user_notes_path(current_user.id), :class => 'btn-link', :style => 'float:left' do %>
+                <i class="fa fa-1x fa-plus" aria-hidden="true">&nbsp;添加</i>
+            <% end %>
 
-                
-                 
-            <a href="#" class="card-link">Another link</a>
-            <span class="dropdown" style="float: right">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         Export 
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <%= button_to  user_note_evernote_path(current_user.id, note.id),  method: :post, title:note.title,:class => 'btn-link dropdown-item' do %>
-                            <%= image_tag "evernote_logo.png", :style =>"width: 24px; height: 24px;" %> Evernote
-                        <% end %>
+            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;多选</button>
 
-                        <div class="dropdown-divider"></div>
-                        <%= button_to  user_note_markdown_path(current_user.id, note.id),  method: :get, title:note.title,:class => 'btn-link dropdown-item' do %>
-                            <%= image_tag "markdown_logo.png", :style =>"width: 24px; height: 24px;" %> Markdown
-                        <% end %>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>&nbsp;排序</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12" style="clear: both; margin-top: 10px;">
+        <% @notes.each do |note| %>
+            <div class="post-list-item">
+                <div class="post-list-item-container">
+                    <div class="item-thumb  bg-" style="background-image:url('<%= note.cover_url %>');">
                     </div>
-            </span>
-        </div>
+                    <%= link_to user_note_path(current_user.id, note.id) do %> 
+                        <div class="item-desc">
+                            <p><%= note.summary %></p>
+                        </div>
+                    <% end %>
+                    <div class="item-slant reverse-slant  bg-"></div>
+                    <div class="item-slant"></div>
+                    <div class="item-label">
+                        <div class="item-title">
+                            <%= link_to user_note_path(current_user.id, note.id), :title => note.title do %> 
+                                <%= note.title %>
+                            <% end %>
+                        </div>
+                        <div class="item-meta clearfix">
+                            <div class="item-meta-ico bg-ico-book" style="no-repeat;background-size: 40px auto;">
+                            </div>
+                            <div class="item-meta-cat">
+                                <a href="/tags#nginx" title="访问 nginx" data-hover="nginx">nginx</a>
+                                <a href="/archives#2017" title="访问 2017" data-hover="2017-07-19 19:02">2017-07-19 19:02</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% end %>
     </div>
-<% end %>
 </div>
-    <div class="col-lg-12 digg_pagination" style="display: block;width: 30rem; float:right; margin-top: 20px;">
-        <%= will_paginate @notes, :container => false %>
-    </div>
+<div class="col-lg-12 digg_pagination" style="display: block;width: 30rem; float:right; margin-top: 20px;">
+    <%= will_paginate @notes, :container => false %>
+</div>
 

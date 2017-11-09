@@ -14,7 +14,7 @@ class Ability
       # end
     if user
       can [:crud, :index], User
-      can [:show], Note
+      can [:crud], Note
       can [:crud, :export_to_markdown, :export_to_evernote], Note, user_ids: user.id
     end
     #

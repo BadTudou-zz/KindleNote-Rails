@@ -20,6 +20,14 @@ class NotesController < ApplicationController
         @note.fragments = Fragment.where(user_id: current_user.id, note_id: params[:id])
     end
 
+    def update
+    end
+
+    def destroy
+        flash[:success] = "The note has been deleted successfully！" if Note.destroy(params[:id])
+        redirect_to user_notes_path(current_user.id)
+    end
+
     def export_to_markdown
         @note = Note.find(params[:note_id])
         @note.fragments = Fragment.where(user_id: current_user.id, note_id: params[:note_id])

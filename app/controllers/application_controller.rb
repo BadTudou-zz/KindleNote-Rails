@@ -18,8 +18,13 @@ class ApplicationController < ActionController::Base
   def require_login
     unless logged_in?
       flash[:danger] = "You must be logged in to access this section"
+      store_return_to
       redirect_to login_url # halts request cycle
     end
+  end
+
+  def store_return_to
+    session[:return_to] = request.url
   end
 
 end

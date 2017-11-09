@@ -17,8 +17,9 @@ class StoreNoteInfoFromDoubanJob < ApplicationJob
         request = Net::HTTP::Get.new(uri.request_uri)
         response = http.request(request)
         book = JSON.parse(response.body.force_encoding("UTF-8"))
-        note.cover_url = book["books"][0]["image"] || ''
+        note.cover_url = book["books"][0]["images"]["large"] || ''
         note.rating = book["books"][0]["rating"]["average"] || 0
+        note.summary = book["books"][0]["summary"] || ''
         note.save
     rescue Exception => e
         puts e

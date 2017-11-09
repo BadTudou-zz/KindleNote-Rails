@@ -12,6 +12,7 @@
     <!-- Element ui -->
     <link href="https://cdn.bootcss.com/element-ui/1.4.3/theme-default/index.css" rel="stylesheet">
 
+    <link href="/style/css/style-liberxue.css" rel="stylesheet" type="text/css" />
     <link href="/style/css/pagination.css" rel="stylesheet" type="text/css" />
    
     <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -33,7 +34,7 @@
   </head>
 
   <body>
-    <header>
+    <header style="margin-bottom: 20px;">
         <%= render "shared/header" %>
     </header>
     <div class="container">
@@ -50,4 +51,8 @@
         <%= render "shared/footer" %>
     </footer>
   </body>
+  <script type="text/javascript">
+    //auto hide the flash messages after 3 ms
+    $(".alert" ).fadeOut(3000);
+  </script>
 </html>

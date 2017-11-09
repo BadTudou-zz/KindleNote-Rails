@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
             render :json => {
                 status:true,
                 message:'Login success',
-                url: user_path(user)
+                url: back_or_default_url(user_path(user))
             }
         else
             flash[:warning] = 'email or passowrd wrong'
@@ -24,5 +24,11 @@ class SessionsController < ApplicationController
     def destroy
         log_out
         redirect_to root_url
+    end
+
+    def back_or_default_url(default)
+        return_to = session[:return_to] || default
+        session[:return_to] = nil
+        return_to
     end
 end
