@@ -5,11 +5,12 @@
         </div>
         
         <div class="col-lg-3" style="float: right;">
-            <%= button_to  user_notes_path(current_user.id), :class => 'btn-link', :style => 'float:left' do %>
-                <i class="fa fa-1x fa-plus" aria-hidden="true">&nbsp;添加</i>
-            <% end %>
 
-            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;多选</button>
+            <%= link_to  new_user_clipping_path(current_user.id), :class => 'btn-link', :style => 'float:left' do %>
+                <i class="fa fa-2x fa-cloud-upload" aria-hidden="true">&nbsp;&nbsp;</i>
+            <% end %>
+            
+            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;多选</button>&nbsp;
 
             <div class="btn-group">
                 <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>&nbsp;排序</button>

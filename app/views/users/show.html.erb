@@ -1,34 +1,30 @@
-<div class="col-lg-2"></div>
-<div class="col-lg-8">
-    <h3>Applications</h3>
-    <hr>
-    <ul style="list-style-type:none">
-        <li>
-            <div class="col-lg-12">
-                <span class="col-lg-4">
-                    <%= image_tag "evernote_logo.png", :style => "img-circle img-thumbnail",:class =>"width: 36px; height: 36px;" %> &nbsp;&nbsp;Evernote
-                </span>
-                <span class="col-lg-4"></span>
-                <span class="col-lg-4">
-                    <% if !current_user.access_tokens.where(name: 'evernote').first.nil? %>
-                        <%= link_to 'Revoke', evernote_authorize_path, :class => 'btn btn-sm btn-outline-primary text-danger' %> 
-                    <% else %>
-                        <%= link_to 'Authorized', evernote_authorize_path, :class => 'btn btn-sm btn-outline-primary' %>   
-                    <% end %>
-                </span>
+<div class="col-lg-12">
+    <div class="col-lg-2" style="float: left;">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+        
+            <a class="nav-link" id="v-pills-applications-tab" data-toggle="pill" href="#v-pills-applications" role="tab" aria-controls="v-pills-applications" aria-selected="false">Applications</a>
+    
+            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+        
+            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+        </div>
+    </div>
+
+    <div class="col-lg-10" style="float: left;">
+        <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
+            <div class="tab-pane fade" id="v-pills-applications" role="tabpanel" aria-labelledby="v-pills-applications-tab">
+                <div class="col-lg-8">
+                    <%= render "users/applications" %>
+                </div>
             </div>
-            <div class="col-lg-12">
-                <% if !current_user.access_tokens.where(name: 'evernote').first.nil? %>
-                    <small class="text-muted"><%= current_user.access_tokens.where(name: 'evernote').first.expires %></small>
-                <% else %>
-                    <small class="text-muted">KindleNote has no access to Evernote</small>
-                <% end %>
+            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                <div class="col-lg-8">
+                    <%= render "users/profile" %>
+                </div>
             </div>
-            
-        </li>
-    </ul>
-    <% if logged_in? %>
-    <%= current_user.name %>
-    <% end %>
+            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+        </div>
+    </div>
 </div>
-<div class="col-lg-2"></div>

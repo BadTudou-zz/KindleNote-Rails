@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light bg-white" style="height: 60px;">
-  <a class="navbar-brand" href="#" style="margin-left: 30px;">
+  <a class="navbar-brand" href="<%= logged_in? ? user_notes_path(current_user) : root_path %>" style="margin-left: 30px;">
     <%= image_tag "logo.png", :width => "35", :height => "35", :class => "d-inline-block align-top" %>
     KindleNote
   </a>
@@ -16,12 +16,15 @@
           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle fa-2x"></i></a>
         
           <div class="dropdown-menu">
-            <span class="dropdown-item disabled" disabled style="color:#3089DF;"><%= current_user.name %></span>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
 
+            <span class="dropdown-item disabled" disabled style="color:#3089DF;"><%= current_user.name %></span>
             <div class="dropdown-divider"></div>
-            <%= button_to "Sign out", logout_path, method: :delete, :class => 'btn-link dropdown-item' %>
+            <a class="dropdown-item" href="<%= user_notes_path(current_user) %>"><i class="fa fa-book" aria-hidden="true">&nbsp;Your notes</i></a>
+            <a class="dropdown-item" href="<%= user_path(current_user) %>"><i class="fa fa-cog" aria-hidden="true">&nbsp;Set up</i></a>
+            <div class="dropdown-divider"></div>
+            <%= button_to logout_path, method: :delete, :class => 'btn-link dropdown-item' do %>
+              <i class="fa fa-power-off" aria-hidden="true">Sign out</i>
+            <% end %>
           </div>
         </div>
       </li>

@@ -1,0 +1,31 @@
+<div class="col-lg-9" style="float: left;">
+<h3>Profile</h3>
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Name</label>
+            <input type="text" class="form-control" id="inputName" aria-describedby="nameHelp" placeholder="Enter Name" value="<%= current_user.name %>">
+            <small id="nameHelp" class="form-text text-muted">Your name will be visible to other people.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email</label>
+            <input type="text" class="form-control" id="inputEmail" aria-describedby="EmailHelp" placeholder="Enter Email" value="<%= current_user.email %>">
+            <small id="nameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+<hr>
+</div>
+<div class="col-lg-3 text-center" style="float: right">
+        <h4>&nbsp;</h4>
+        <label for="exampleInputEmail1">Avatar</label>
+        <div class="col-lg-8" style="float: none;"></div>
+        <div class="col-lg-2" style="float: right;">
+        <%= image_tag("logo.png") %>
+        <button type="button" class="btn btn-outline-primary">Primary</button>
+        <div>
+</div>

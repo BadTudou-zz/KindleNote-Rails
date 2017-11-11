@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
             render :json => {
                 status:true,
                 message:'Login success',
-                url: back_or_default_url(user_path(user))
+                url: back_or_default_url(user_notes_path(user))
             }
         else
             flash[:warning] = 'email or passowrd wrong'
