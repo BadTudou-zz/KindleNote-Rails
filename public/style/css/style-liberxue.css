@@ -75,7 +75,7 @@ border-radius: .6rem;}
 .post-list-item-container .item-slant{position:absolute;z-index:0;right:0;bottom:50px;left:0;width:110%;min-height:100px;-webkit-transform:rotate(7deg) translate(-10px,0);-ms-transform:rotate(7deg) translate(-10px,0);transform:rotate(7deg) translate(-10px,0);background-color:#fff;}
 .post-list-item-container .item-slant.reverse-slant{-webkit-transform:rotate(-10deg) translate(10px,-10px);-ms-transform:rotate(-10deg) translate(10px,-10px);transform:rotate(-10deg) translate(10px,-10px);opacity:.7;background-color:#f68e5f;-webkit-box-shadow:none;box-shadow:none;}
 .post-list-item-container .item-label{position:relative;height:130px;padding:25px 20px 40px;background-color:#fff;}
-.post-list-item-container .item-label .item-title a{font-size:15px;word-break:break-all;color:#313131;line-height: 30px;overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;-webkit-line-clamp:2; }
+.post-list-item-container .item-label .item-title a{font-size:15px;word-break:break-all;color:#313131;line-height: 30px;overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;-webkit-line-clamp:1; }
 .post-list-item-container .item-label .item-title a:hover{
     font-size:15px;word-break:break-all;color:#eb5055;line-height: 30px;overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;-webkit-line-clamp:2;
 }
@@ -247,6 +247,9 @@ pre code::after {font-size: 1rem;color: #BFBFBF;position: absolute;top: 5px;righ
 .comment-form .submit{font-size:13px;position:absolute;right:20px;bottom:20px;display:block;height:32px;margin:0 auto;padding:0 20px;-webkit-transition-duration:400ms;transition-duration:400ms;text-align:center;color:#313131;border:1px solid #f7f7f7;border-radius:30px;background-color:#f7f7f7;}
 .comment-form .submit:hover,.submit:focus,.submit:active,.submit:active:focus{color:#eb5055;border:1px solid #eb5055;outline-style:none;background-color:#fff;}
 
+
+.big-checkbox {width: 100px; height: 100px;}
+.batchMode {color:#f47721;}
 
 
 /* ==========================================================================

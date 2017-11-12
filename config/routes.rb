@@ -21,6 +21,8 @@ Rails.application.routes.draw do
         post 'evernote', to: 'notes#export_to_evernote', as: 'evernote'
         resources :fragments
       end
+      post 'notes/batch',    to: 'notes#batch', as: 'batch'
+      get  'notes/download/:file', to: 'notes#download_markdown', as: 'download'
     end
    
   root 'welcome#index'
