@@ -41,6 +41,7 @@ gem 'evernote_oauth'
 gem 'htmlentities', '~> 4.3', '>= 4.3.4'
 gem 'cancancan', '~> 2.0'
 gem 'listen', '>= 3.0.5', '< 3.2'
+gem 'qq_conn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

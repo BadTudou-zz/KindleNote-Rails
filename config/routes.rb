@@ -14,6 +14,11 @@ Rails.application.routes.draw do
       get '/',          to: 'evernote#user'
     end
 
+    scope 'qq' do
+      get 'authorize',     to: 'qq#authorize', as: 'qq_authorize'
+      get 'callback',      to: 'qq#callback', as: 'qq_callback'
+    end
+
     resources :users do
       resources :clippings
       resources :notes do

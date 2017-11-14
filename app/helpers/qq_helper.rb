@@ -1,0 +1,2 @@
+module QqHelper
+end

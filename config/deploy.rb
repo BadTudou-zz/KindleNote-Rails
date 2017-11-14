@@ -5,7 +5,7 @@ set :application, "kindlenode"
 set :repo_url, "git@github.com:BadTudou/KindleNote-Rails.git"
 set :branch, :master
 set :pty, true
-set :linked_files, %w{config/database.yml config/application.yml}
+set :linked_files, %w{config/database.yml config/application.yml config/evernote.yml config/qq_secrets.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
 set :keep_releases, 5
 set :bundle_binstubs, nil
