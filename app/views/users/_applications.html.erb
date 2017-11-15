@@ -33,9 +33,9 @@
                 <span class="col-lg-4"></span>
                 <span class="col-lg-4">
                     <% if !current_user.access_tokens.where(name: 'qq').first.nil? %>
-                        <%= link_to 'Revoke', evernote_authorize_path, :class => 'btn btn-sm btn-outline-primary text-danger' %> 
+                        <%= link_to 'Revoke', qq_authorize_path, :class => 'btn btn-sm btn-outline-primary text-danger' %> 
                     <% else %>
-                        <%= link_to 'Authorized', evernote_authorize_path, :class => 'btn btn-sm btn-outline-primary' %>   
+                        <%= link_to 'Authorized', qq_authorize_path, :class => 'btn btn-sm btn-outline-primary' %>   
                     <% end %>
                 </span>
         </div>
