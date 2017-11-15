@@ -16,10 +16,16 @@ class QqController < ApplicationController
     def callback
         raise 'CSRF!' if session['csrf'] != params['state']
         u = Qq.new(params['code'])
-        current_user.access_tokens.create(user_id: current_user.id, name: 'qq', access_token: u.token, expires: nil, revoked:true )
+        access_token_qq = AccessToken.find_by(name: 'qq', access_token: u.openid)
+        if !access_token_qq.nil?
+            user = User.find(access_token_qq.user_id)
+            log_in user
+            return redirect_to user_notes_path(user)
+        end
+        current_user.access_tokens.create(user_id: current_user.id, name: 'qq', access_token: u.openid, expires: nil, revoked:true )
         render :json => {
                     status:true,
-                    message: u.get_user_info
+                    message: 'QQ授权成功'
         }
     end
 end

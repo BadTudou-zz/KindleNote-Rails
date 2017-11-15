@@ -4,7 +4,7 @@
     <li>
         <div class="col-lg-12">
                 <span class="col-lg-4">
-                    <%= image_tag "evernote_logo.png", :style => "img-circle img-thumbnail",:class =>"width: 36px; height: 36px;" %> &nbsp;&nbsp;Evernote
+                    <%= image_tag "evernote_logo.png", :style => "img-circle img-thumbnail",:style =>"width: 60px; height: 60px;" %> &nbsp;&nbsp;Evernote
                 </span>
                 <span class="col-lg-4"></span>
                 <span class="col-lg-4">
@@ -21,6 +21,30 @@
                     <small class="text-muted"><%= current_user.access_tokens.where(name: 'evernote').first.expires %></small>
                 <% else %>
                     <small class="text-muted">KindleNote has no access to Evernote</small>
+                <% end %>
+        </div>
+            
+    </li>
+    <li>
+        <div class="col-lg-12">
+                <span class="col-lg-4">
+                    <%= image_tag "qq_logo.png", :style => "img-circle img-thumbnail",:style =>"width: 60px; height: 60px;" %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QQ
+                </span>
+                <span class="col-lg-4"></span>
+                <span class="col-lg-4">
+                    <% if !current_user.access_tokens.where(name: 'qq').first.nil? %>
+                        <%= link_to 'Revoke', evernote_authorize_path, :class => 'btn btn-sm btn-outline-primary text-danger' %> 
+                    <% else %>
+                        <%= link_to 'Authorized', evernote_authorize_path, :class => 'btn btn-sm btn-outline-primary' %>   
+                    <% end %>
+                </span>
+        </div>
+        
+        <div class="col-lg-12">
+                <% if !current_user.access_tokens.where(name: 'qq').first.nil? %>
+                    <small class="text-muted"><%= current_user.access_tokens.where(name: 'qq').first.expires %></small>
+                <% else %>
+                    <small class="text-muted">KindleNote has no access to QQ</small>
                 <% end %>
         </div>
             
