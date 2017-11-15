@@ -2,6 +2,7 @@
 Dir.chdir(Rails.root+'config')
 require 'qq'
 class QqController < ApplicationController
+    skip_before_action :require_login, only: [:authorize, :callback]
     load_and_authorize_resource :user
 
     def authorize
