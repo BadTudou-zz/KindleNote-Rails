@@ -33,19 +33,33 @@ class EvernoteController < ApplicationController
             en_user = user_store.getUser
 
             access_token_evernote = AccessToken.find_by(name: 'evernote', openid: en_user.id)
-            if !access_token_evernote.nil?
-                user = User.find(access_token_evernote.user_id)
-                log_in user
-                return redirect_to user_notes_path(user)
+            if logged_in?
+                    # 更新绑定的Evernote
+                if !access_token_evernote.nil?
+                    flash[:success] = "已重新绑定Evernote"
+                    access_token_evernote.update(user_id: current_user.id, name: 'evernote', access_token: session[:access_token].token, openid: en_user.id, expires: Time.at(session[:access_token_expires].to_i / 1000), revoked:true )
+                else
+                    # 新绑定Evernote
+                    flash[:success] = "绑定Evernote成功"
+                    current_user.access_tokens.create(user_id: current_user.id, name: 'evernote', access_token: session[:access_token].token, openid: en_user.id, expires: nil, revoked:true )
+                end
+                return redirect_to user_notes_path(current_user)
+            else
+                # 旧用户登录
+                if !access_token_evernote.nil?
+                    flash[:success] = "使用Evernote登录成功"
+                    user = User.find(access_token_evernote.user_id)
+                    log_in user
+                    return redirect_to user_notes_path(user)
+                else
+                    flash[:success] = "注册成功，请及时设置您的邮箱和密码"
+                    new_user = User.create(name: en_user.username, password_digest: 'kindlenote')
+                    new_user.access_tokens.create(user_id: new_user.id, name: 'evernote', access_token: session[:access_token].token, openid: en_user.id, expires: nil, revoked:true )
+                    log_in new_user
+                    return redirect_to user_notes_path(new_user)
+                end
             end
-
-            if !logged_in?
-                new_user = User.create(name: en_user.username, password_digest: 'kindlenote')
-                new_user.access_tokens.create(user_id: new_user.id, name: 'evernote', access_token: session[:access_token].token, openid: en_user.id, expires: nil, revoked:true )
-                log_in new_user
-                return redirect_to user_notes_path(new_user)
-            end
-            access_token_evernote.update(user_id: current_user.id, name: 'evernote', access_token: session[:access_token].token, openid: en_user.id, expires: Time.at(session[:access_token_expires].to_i / 1000), revoked:true )
+            
             
         rescue => e
             return render :json => {
@@ -54,19 +68,9 @@ class EvernoteController < ApplicationController
                 message:e
             }
         end
-
-        render :json => {
-                status:true,
-                message:'evernote oauth success',
-                expires: Time.at(session[:access_token_expires].to_i / 1000),
-                evernote: en_user
-            }
     end
 
     
-
-    
-
     def user
         render :json => {
                 status:true,
