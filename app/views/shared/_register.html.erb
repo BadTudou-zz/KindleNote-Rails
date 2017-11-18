@@ -1,15 +1,15 @@
   <div class="card text-center" id="register">
     <div class="card-block">
-      <div class="img-circle img-thumbnail img-responsive">
+      <div class="img-thumbnail img-responsive">
       <i class="fa fa-4x fa-user-circle-o " aria-hidden="true" style="color: #707B85"></i></div>
     </div>
     <div class="card-block">
       <h4 class="card-title">注册</h4>
       <form id="div-form" :model="user">
-        <div class="input-group">
+        <!-- <div class="input-group">
           <span class="input-group-addon col-lg-2">&nbsp;&nbsp;<i class="fa fa-2x fa-user" aria-hidden="true"></i>&nbsp;&nbsp;</span>
           <input type="text" class="form-control" placeholder="用户名" v-model="user.name">
-        </div>
+        </div> -->
         <div class="input-group">
           <span class="input-group-addon col-lg-2">&nbsp;<i class="fa fa-2x fa-envelope" aria-hidden="true"></i></span>
           <input type="email" class="form-control" placeholder="邮箱" v-model="user.email">
@@ -20,6 +20,7 @@
         </div>
       </form>
     </div>
+    <%= render "shared/third_party_login" %>
     <div class="card-block">
       <a href="#" class="btn btn-primary" @click="register()">立即注册</a><br>
       <a href="login" class="card-link text-right">已经注册?</a>

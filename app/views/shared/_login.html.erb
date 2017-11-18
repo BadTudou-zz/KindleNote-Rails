@@ -1,6 +1,6 @@
   <div class="card text-center" id="login">
     <div class="card-block">
-      <div class="img-circle img-thumbnail img-responsive">
+      <div class="img-thumbnail img-responsive">
       <i class="fa fa-4x fa-user-circle-o " aria-hidden="true" style="color: #707B85"></i></div>
     </div>
     <div class="card-block">
@@ -16,6 +16,7 @@
         </div>
       </form>
     </div>
+    <%= render "shared/third_party_login" %>
     <div class="card-block">
       <a href="#" class="btn btn-primary" @click="login()">立即登陆</a><br>
       <a href="register" class="card-link text-right">还未注册?</a>

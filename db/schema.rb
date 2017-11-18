@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108100700) do
+ActiveRecord::Schema.define(version: 20171118071617) do
 
   create_table "access_tokens", force: :cascade do |t|
     t.integer "user_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20171108100700) do
     t.boolean "revoked"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "openid"
     t.index ["user_id"], name: "index_access_tokens_on_user_id"
   end
 
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 20171108100700) do
     t.string "rember_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "openid"
   end
 
 end
