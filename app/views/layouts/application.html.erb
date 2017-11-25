@@ -3,8 +3,8 @@
   <head>
     <title>KindleNote</title>
     <%= csrf_meta_tags %>    
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <!--Font-awesome -->
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -37,7 +37,7 @@
     <header style="margin-bottom: 20px;">
         <%= render "shared/header" %>
     </header>
-    <div class="container">
+    <div class="container" id="app">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <% flash.each do |key, value| %>
@@ -54,5 +54,21 @@
   <script type="text/javascript">
     //auto hide the flash messages after 3 ms
     $(".alert" ).fadeOut(3000);
+    App.cable.subscriptions.create(
+    { channel: "WebNotificationsChannel", room: "myroom" },
+    { received: function(data) { console.log(arguments); app.notify(data['title'], data['message'])} });
+
+    var app = new Vue({
+        methods:{
+            notify(title, message) {
+                const h = this.$createElement;
+
+                this.$notify({
+                    title: title,
+                    message: h('i', { style: 'color: teal' }, message)
+                });
+            }
+        }
+    });
   </script>
 </html>

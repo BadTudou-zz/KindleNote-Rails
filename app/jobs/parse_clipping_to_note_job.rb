@@ -26,6 +26,7 @@ class ParseClippingToNoteJob < ApplicationJob
                 puts e
                 next
             end
+            ActionCable.server.broadcast "web_notifications_channel#{user.id}", title: '提示', message: "笔记#{note_saved.title}解析完成"
         end
     end
   end

@@ -28,7 +28,6 @@ class ClippingsController < ApplicationController
             puts 'error'
             flash[:danger] = 'Can not parse clipping to note'
         end
-        
         render :json => {
                 status:true,
                 message:'Login success',

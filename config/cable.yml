@@ -1,5 +1,7 @@
 development:
-  adapter: async
+  adapter: redis
+  url: redis://localhost:6379/1
+  channel_prefix: kindlenote_production
 
 test:
   adapter: async
@@ -7,4 +9,4 @@ test:
 production:
   adapter: redis
   url: redis://localhost:6379/1
-  channel_prefix: KindleNote_production
+  channel_prefix: kindlenote_production
