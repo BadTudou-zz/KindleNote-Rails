@@ -15,7 +15,6 @@ class QqController < ApplicationController
     end
 
     def callback
-        raise 'CSRF!' if session['csrf'] != params['state']
         u = Qq.new(params['code'])
         access_token_qq = AccessToken.find_by(name: 'qq', openid: u.openid)
         if logged_in?
